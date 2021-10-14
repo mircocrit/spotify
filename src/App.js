@@ -114,6 +114,7 @@ const App = () => {
             </TableBody>
         </Table>
      </TableContainer>
+     </Container>
 
      <AppBar position="static" color="primary">
         <Toolbar>
@@ -121,7 +122,6 @@ const App = () => {
           <Link href="https://github.com/mircocrit?tab=repositories">About</Link>   
         </Toolbar>
      </AppBar>
-     </Container>
       </div>
   )
 }
