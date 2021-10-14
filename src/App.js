@@ -9,7 +9,6 @@ import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import FormGroup from '@mui/material/FormGroup';
-
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
@@ -17,7 +16,7 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import TableBody from '@mui/material/TableBody';
 import Grid from '@mui/material/Grid';
-
+import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 
@@ -25,6 +24,7 @@ const App = () => {
   const [text, setText] = useState('');
   const [token, setToken] = useState('');
   const [songs, setSongs] = useState([]);
+  const [showTable, setshowTable] = useState(false)
 
     useEffect(() => {
         //FETCH token
@@ -56,6 +56,7 @@ const App = () => {
 
     const onSubmit = (e) => {
         e.preventDefault()
+        setshowTable(true)
         if (!text) {
             alert('Please add artist')
             return
@@ -86,11 +87,14 @@ const App = () => {
                                     value={text} 
                                     onChange={(e) => setText(e.target.value)} />
                     </FormGroup>
-                    <Button type="submit" color="primary" variant="contained" color="primary"> go </Button>
+                    <Box textAlign='center'>
+                        <Button type="submit" color="primary" variant="contained" color="primary"> go </Button>
+                    </Box>
                 </Grid>
             </Grid>
         </form>
 
+    {showTable &&
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
             <TableHead>
@@ -114,14 +118,16 @@ const App = () => {
             </TableBody>
         </Table>
      </TableContainer>
+     }
      </Container>
-
-     <AppBar position="static" color="primary">
-        <Toolbar>
-          <Typography variant="body1" color="inherit"> © 2021 mircocrit</Typography>
-          <Link href="https://github.com/mircocrit?tab=repositories">About</Link>   
-        </Toolbar>
-     </AppBar>
+     <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+        <AppBar position="static" color="primary">
+            <Toolbar>
+            <Typography variant="body1" color="inherit"> © 2021 mircocrit</Typography>
+            <Link href="https://github.com/mircocrit?tab=repositories">About</Link>   
+            </Toolbar>
+        </AppBar>
+     </Paper>
       </div>
   )
 }
