@@ -66,7 +66,7 @@ const App = () => {
   return (
       <div>
       <Container maxWidth="sm">
-        <AppBar position="fixed" color="success">
+        <AppBar position="fixed" color="primary">
             <Toolbar>
                 <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
                     <img src="Spotify.png" width="30" height="30" alt=""/>
