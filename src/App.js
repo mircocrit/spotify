@@ -1,6 +1,25 @@
 import { useState, useEffect } from 'react'
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from '@mui/material/Button';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import TextField from '@mui/material/TextField';
+import Container from '@mui/material/Container';
+import FormGroup from '@mui/material/FormGroup';
+
+import TableContainer from '@mui/material/TableContainer';
+import Table from '@mui/material/Table';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+import TableBody from '@mui/material/TableBody';
+import Grid from '@mui/material/Grid';
+
+import Paper from '@mui/material/Paper';
+import Link from '@mui/material/Link';
 
 const App = () => {
   const [text, setText] = useState('');
@@ -45,61 +64,65 @@ const App = () => {
     }
 
   return (
-      <div className="container-fluid bg-light">
-      <nav className="navbar navbar-light bg-dark">
-          <a className="navbar-brand text-light" href="#">
-              <img src="Spotify.png" width="30" height="30" alt=""/> Spotify Web API
-          </a>
-      </nav>
+      <div>
+      <Container maxWidth="sm">
+        <AppBar position="fixed" color="success">
+            <Toolbar>
+                <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+                    <img src="Spotify.png" width="30" height="30" alt=""/>
+                </IconButton>
+                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}> Spotify Web API </Typography>
+            </Toolbar>
+        </AppBar>
 
-      <div className="container-fluid bg-light">
+        <br/><br/><br/>
+
         <form className='add-form' onSubmit={onSubmit}>
-            <div className='row justify-content-md-center text-center'>
-                <div className='col-md-auto'>
-                  <div className='form-group'>
-                    <label for='artist'>Artist: </label>
-                    <input type='text' id='artist' placeholder='Artist' class="form-control form-control-sm" value={text}
-                           onChange={(e) => setText(e.target.value)}
-                    />
-                  </div>
-                 <input type='submit' value='go' className='btn btn-block' class="btn btn-primary" />
-                </div>
-            </div>
+            <Grid container spacing={3} justifyContent="center" alignItems="center">
+                <Grid item xs={6}>
+                    <FormGroup>
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}> Artist: </Typography>
+                        <TextField id="outlined-basic" label="Artist name" variant="outlined" 
+                                    value={text} 
+                                    onChange={(e) => setText(e.target.value)} />
+                    </FormGroup>
+                    <Button type="submit" color="primary" variant="contained" color="primary"> go </Button>
+                </Grid>
+            </Grid>
         </form>
-      </div>
 
-      <div className="container-fluid bg-light">
-          <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-              <thead>
-                 <tr>
-                     <th class="th-sm">Song</th>
-                     <th class="th-sm">Popularity</th>
-                     <th class="th-sm">Album</th>
-                     <th class="th-sm">Year</th>
-                 </tr>
-              </thead>
-              <tbody>
-              {songs.map(
-                  (song, index) => (
-                    <tr>
-                        <td>{song.name}</td>
-                        <td>{song.popularity}</td>
-                        <td>{song.album.name}</td>
-                        <td>{song.album.release_date}</td>
-                    </tr>
+      <TableContainer component={Paper}>
+        <Table aria-label="simple table">
+            <TableHead>
+                <TableRow>
+                    <TableCell align="center">Song</TableCell>
+                    <TableCell align="center">Popularity</TableCell>
+                    <TableCell align="center">Album</TableCell>
+                    <TableCell align="center">Year</TableCell>
+                </TableRow>
+            </TableHead>
+            <TableBody>
+              {songs.map((song, index) => (
+                    <TableRow>
+                        <TableCell component="th" scope="row" align="center">{song.name}</TableCell>
+                        <TableCell align="center">{song.popularity}</TableCell>
+                        <TableCell align="center">{song.album.name}</TableCell>
+                        <TableCell align="center">{song.album.release_date}</TableCell>
+                    </TableRow>
                   ))
               }
-              </tbody>
-          </table>
+            </TableBody>
+        </Table>
+     </TableContainer>
+
+     <AppBar position="static" color="primary">
+        <Toolbar>
+          <Typography variant="body1" color="inherit"> © 2021 mircocrit</Typography>
+          <Link href="https://github.com/mircocrit?tab=repositories">About</Link>   
+        </Toolbar>
+     </AppBar>
+     </Container>
       </div>
-
-
-      <footer class='row text-center fixed-bottom'>
-        <p>Copyright mircocrit@2021</p>
-        <a href='https://github.com/mircocrit?tab=repositories'> About</a>
-      </footer>
-      </div>
-
   )
 }
 
