@@ -37,9 +37,8 @@ const App = () => {
                 },
                 body: 'grant_type=client_credentials'
             })
-            const data = await res.json();
-            setToken(data.access_token);
-            console.log(data.access_token);
+            const data = await res.json()
+            setToken(data.access_token)
         }
         fetchToken('144a153dcf2b4d29bf48ec5b610942e2','c18582449e0b4e3ca732f8f45de5ba91');
     }, [])
